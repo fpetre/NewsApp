@@ -1,0 +1,7 @@
+<h2>All Feeds</h2>
+
+<ul>
+  <% collection.forEach(function(feed) { %>
+    <li><%= feed.escape("title") %></li>
+  <% }); %>
+</ul>
