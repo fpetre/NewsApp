@@ -2,7 +2,8 @@ NewsReader.Views.Index = Backbone.View.extend({
   template: JST["index"],
 
   events: {
-    "click a.delete": "confirmDelete"
+    "click a.delete": "confirmDelete",
+    "click a.new-feed" : "newFeedForm"
   },
 
   initialize: function(){
@@ -13,7 +14,17 @@ NewsReader.Views.Index = Backbone.View.extend({
   render: function() {
     var template = this.template({collection: this.collection});
     this.$el.html(template);
+
     return this;
+  },
+
+  form: function(){
+    // if (!this._form) {
+      console.log("made a new form");
+      this._form = new NewsReader.Views.Form({collection: this.collection});
+    // }
+
+    return this._form;
   },
 
   confirmDelete: function(event) {
@@ -27,7 +38,11 @@ NewsReader.Views.Index = Backbone.View.extend({
 
   deleteFeed: function(model) {
     model.destroy();
-  }
+  },
 
+  newFeedForm: function(event) {
+    event.preventDefault();
+    this.$el.append(this.form().render().$el);
+  }
 
 });

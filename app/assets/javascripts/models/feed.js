@@ -1,5 +1,12 @@
 NewsReader.Models.Feed = Backbone.Model.extend({
   urlRoot: "/api/feeds",
+  validate: function(attributes) {
+    console.log(attributes);
+    if (NewsReader.Collections.feeds.where({url: attributes.feed.url}).length > 0) {
+      console.log("validates");
+      return "that already exists";
+    }
+  },
 
   entries: function() {
     if(!this._entries) {
