@@ -6,15 +6,18 @@ NewsReader.Routers.Router = Backbone.Router.extend({
 
   initialize: function(options) {
     this.$el = options.el;
+    this.collection = options.collection;
   },
 
   feedsIndex: function() {
-    var collection = NewsReader.Collections.feeds;
-    collection.fetch();
-    var index = new NewsReader.Views.Index({collection: collection});
+    var index = new NewsReader.Views.Index({collection: this.collection});
     this.$el.html(index.render().$el);
   },
 
-  feedShow: function() {alert("feed show");}
+  feedShow: function(id) {
+    var model = this.collection.getOrFetch(id);
+    var show = new NewsReader.Views.Show({model: model});
+    this.$el.html(show.render().$el);
+  }
 
 })
