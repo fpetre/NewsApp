@@ -4,7 +4,9 @@
   <% collection.forEach(function(feed) { %>
     <li>
       <a href="#/feeds/<%=feed.id%>"><%= feed.escape("title") %>
+        <a href="javascript:void(0)" id="<%= feed.id %>" class="delete">Delete Feed</a>
       </a>
     </li>
   <% }); %>
 </ul>
+
